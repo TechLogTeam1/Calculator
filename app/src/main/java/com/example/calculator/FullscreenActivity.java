@@ -64,16 +64,15 @@ public class FullscreenActivity extends AppCompatActivity {
     private Button mCancel,mNeg,mComma;
 
     private TextView mCmdText;
-    private String CmdLine,CmdLineTmp;
+    private String CmdLine;
     private int CmdNum;
-    private int CalcType,CalcType2;
-    private boolean CalcExec,ExecRunned,ExecRunned2;
+    private int CalcType;
+    private boolean CalcExec,ExecRunned;
     private double Exp1,Exp2,ExpTotal;
-    private boolean DigitPress,CalcPress,CalcPress2;
-    private boolean FirstCalc,NewCalc,CancelPress;
-    private int CalcPressTimes=0;
-    private boolean NumEdited=false,NegPress=false,NegPress2=false;
+    private boolean DigitPress,CalcPress;
+    private boolean FirstCalc,NewCalc;
     private boolean CommaPressed=false,CommaExists=false;
+    private boolean NumEdited=false;
     private int i;
 
     private final View.OnClickListener calcRun = new View.OnClickListener() {
@@ -119,23 +118,36 @@ public class FullscreenActivity extends AppCompatActivity {
                     CmdNum = 9;
                     break;
 
+                case R.id.button:
+                    CommaPressed=true;
+                    DigitPress=true;
+                    break;
+
                 case R.id.buttoneql:
                     CalcExec = true;
                     break; //Exec
                 case R.id.buttonadd:
-                    CalcType2 = CalcType;
                     CalcType = 1;
                     CalcPress = true;
                     FirstCalc = false;
                     break; //Add
                 case R.id.buttonsub:
-                    CalcType2 = CalcType;
                     CalcType = 2;
                     CalcPress = true;
                     FirstCalc = false;
                     break; //Sub
-
+                case R.id.buttonmul:
+                    CalcType = 3;
+                    CalcPress = true;
+                    FirstCalc = false;
+                    break; //Multi
+                case R.id.buttondiv:
+                    CalcType = 4;
+                    CalcPress = true;
+                    FirstCalc = false;
+                    break; //Div
             }
+
 
             if ((CmdNum >= 0) && (CmdNum <= 9)) DigitPress = true;
 
@@ -153,6 +165,19 @@ public class FullscreenActivity extends AppCompatActivity {
             if (CalcPress) NewCalc = true;
 
             if (DigitPress) NumEdited = true;
+
+            if (CommaPressed)
+            {
+                CommaExists=false;
+
+                if (CmdLine.length()>1)
+                    for (i=0;i<=CmdLine.length()-1;i++) if (CmdLine.charAt(i)=='.') CommaExists=true;
+
+                if ((CmdLine=="") || (CmdLine=="N")) CmdLine="0";
+                if (!CommaExists) CmdLine+=".";
+                CommaPressed=false;
+            }
+
 
             if (CmdNum == 0) {
                 if ((CmdLine != "") && (CmdLine != "0")) CmdLine += "0";
@@ -181,6 +206,8 @@ public class FullscreenActivity extends AppCompatActivity {
 
                 if (CalcType == 1) ExpTotal = Exp1 + Exp2;
                 if (CalcType == 2) ExpTotal = Exp1 - Exp2;
+                if (CalcType == 3) ExpTotal = Exp1 * Exp2;
+                if (CalcType == 4) ExpTotal = Exp1 / Exp2;
 
                 CmdLine = String.valueOf(ExpTotal);
                 mCmdText.setText(CmdLine);
