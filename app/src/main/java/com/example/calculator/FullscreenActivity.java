@@ -74,7 +74,7 @@ public class FullscreenActivity extends AppCompatActivity {
     private int CalcPressTimes=0;
     private boolean NumEdited=false,NegPress=false,NegPress2=false;
     private boolean CommaPressed=false,CommaExists=false;
-    private boolean minus;
+    private boolean minus,minusalr;
 
     private int i;
 
@@ -184,6 +184,9 @@ public class FullscreenActivity extends AppCompatActivity {
                 CmdNum = -1;
             }
 
+            //mNum0.setText(String.valueOf((Exp1)));
+            //mComma.setText(String.valueOf((Exp2)));
+
             if ((CmdNum >= 0) && (CmdNum <= 9)) DigitPress = true;
 
             if (!NegPress)
@@ -216,31 +219,24 @@ public class FullscreenActivity extends AppCompatActivity {
             }
             if (NegPress)
             {
+                minusalr=false;
 
-                if ((CmdLine!="0") && (CmdLine!=""))
-                    if (CmdLine.charAt(0)!='-') CmdLine="-"+CmdLine;
-                    else
-                        //if (CmdLine.charAt(0)=='-') CmdLine=CmdLine.substring(1,CmdLine.length());
+                //NEW
+                if (CmdLine.charAt(0)!='-') CmdLine="-"+CmdLine;
+                else
+                {
+                    CmdLine = CmdLine.substring(1, CmdLine.length());
+                    minusalr=true;
+                }
+                if (FirstCalc) Exp1 = Double.valueOf(CmdLine);
+                else Exp2 = Double.valueOf(CmdLine);
 
-                        if (CmdLine.charAt(0)=='-')
-                        {
-                            CmdLine=CmdLine.substring(1,CmdLine.length());
+                //if (minusalr) mComma.setText("*"); else mComma.setText(".");
 
-
-                            if (FirstCalc)
-                                Exp1 = -Exp1;
-
-
-                            if (!FirstCalc)
-                                Exp2 = -Exp2;
-
-
-                        }
+                //if (!minusalr)
                 NegPress2 = true;
 
                 NegPress = false;
-
-
 
             }
 
@@ -301,22 +297,12 @@ public class FullscreenActivity extends AppCompatActivity {
             if (CalcExec)
             {
 
-                if (NegPress2)
-                {
-                    if (FirstCalc)
-                        Exp1 = -Exp1;
-
-
-                    if (!FirstCalc)
-                        Exp2 = -Exp2;
-                }
-
                 if (CalcType == 1) ExpTotal = Exp1 + Exp2;
                 if (CalcType == 2) ExpTotal = Exp1 - Exp2;
                 if (CalcType == 3) ExpTotal = Exp1 * Exp2;
                 if (CalcType == 4) ExpTotal = Exp1 / Exp2;
 
-                if (NegPress2) {ExpTotal=-ExpTotal;NegPress2=false;}
+                if (NegPress2) {/*ExpTotal=-ExpTotal;*/NegPress2=false;}
 
                 CmdLine = String.valueOf(ExpTotal);
                 mCmdText.setText(CmdLine);
@@ -330,13 +316,29 @@ public class FullscreenActivity extends AppCompatActivity {
             }
 
             if (ExecRunned2)
-                if (CalcPress) {
-                    Exp1 = ExpTotal;
+                if (CalcPress)
+                {
+
+                    if (!minusalr)
+                    {
+                        if (!NegPress2) Exp1 = ExpTotal;
+                        else Exp1 = -ExpTotal;
+                    }
+
                     if (NegPress2)
                     {
+                        //mNeg.setText("*");
+                       // if (CmdLine.charAt(0)!='-') CmdLine="-"+CmdLine;
+
+                        if (CmdLine!="")
+                        {
+                            if (FirstCalc) Exp1 = Double.valueOf(CmdLine);
+                            else Exp2 = Double.valueOf(CmdLine);
+                        }
+
                         //if (CmdLine!="")
                         //if (CmdLine.charAt(0)=='-')
-                        if (FirstCalc) Exp1=-Exp1; //CHECK !
+                        //if (FirstCalc) Exp1=-Exp1; //CHECK ! //PREV
                         NegPress2=false;
                     }
                     FirstCalc = false;
