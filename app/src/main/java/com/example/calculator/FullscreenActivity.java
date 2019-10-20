@@ -59,7 +59,7 @@ public class FullscreenActivity extends AppCompatActivity {
             ,mNum4,mNum5,mNum6
             ,mNum7,mNum8,mNum9;
 
-    private Button mAdd,mSub,mMul,mDiv,mExec;
+    private Button mAdd,mSub,mMul,mDiv,mExec,mRoot;
 
     private Button mCancel,mNeg,mComma;
 
@@ -74,7 +74,8 @@ public class FullscreenActivity extends AppCompatActivity {
     private int CalcPressTimes=0;
     private boolean NumEdited=false,NegPress=false,NegPress2=false;
     private boolean CommaPressed=false,CommaExists=false;
-    private boolean minus;
+    private boolean minus,SqrtRun;
+
 
     private int i;
 
@@ -87,6 +88,7 @@ public class FullscreenActivity extends AppCompatActivity {
             DigitPress = false;
             CalcPress = false;
             CancelPress = false;
+            SqrtRun=false;
 
             //CalcType2=CalcType;
             switch (view.getId()) {
@@ -163,6 +165,16 @@ public class FullscreenActivity extends AppCompatActivity {
                 case R.id.button3:
                     NegPress = true;
                     break;
+                case R.id.buttonroot:
+                   /*
+                    CalcType2 = CalcType;
+                    CalcType = 6;
+                    CalcPress = true;
+                    FirstCalc = false;
+                    */
+                    SqrtRun=true;
+                    break; //Square Root
+
 
             }
 
@@ -244,6 +256,7 @@ public class FullscreenActivity extends AppCompatActivity {
 
             }
 
+
             if (CalcPress2)
                 if (CalcPress)
                     if (NumEdited) {
@@ -253,6 +266,7 @@ public class FullscreenActivity extends AppCompatActivity {
                         if (CalcType2 == 2) ExpTotal = Exp1 - Exp2;
                         if (CalcType2 == 3) ExpTotal = Exp1 * Exp2;
                         if (CalcType2 == 4) ExpTotal = Exp1 / Exp2;
+                        if (CalcType2 == 6) ExpTotal = Math.sqrt(Exp1);
 
                         //if (CmdLine.charAt(0)=='-') ExpTotal=-ExpTotal;
 
@@ -298,6 +312,30 @@ public class FullscreenActivity extends AppCompatActivity {
                 else Exp2 = Double.valueOf(CmdLine);
             }
 
+
+            if (SqrtRun)
+            //if (CmdLine!="")
+            {
+
+
+                //PREV
+                // if (FirstCalc) Exp1 = Math.sqrt(Double.valueOf(CmdLine));
+                //else Exp2=Math.sqrt(Double.valueOf(CmdLine));
+
+                if (FirstCalc) Exp1 = Math.sqrt(Double.valueOf(Exp1));
+                else Exp2=Math.sqrt(Double.valueOf(Exp2));
+
+
+                //CmdLine = String.valueOf(ExpTotal);
+                //Exp1=Math.sqrt(Exp1);
+                if (FirstCalc)
+                    mCmdText.setText(String.valueOf(Exp1));
+                else
+                    mCmdText.setText(String.valueOf(Exp2));
+                //SqrtRun=false;
+                //CalcType=0;
+            }
+
             if (CalcExec)
             {
 
@@ -315,6 +353,7 @@ public class FullscreenActivity extends AppCompatActivity {
                 if (CalcType == 2) ExpTotal = Exp1 - Exp2;
                 if (CalcType == 3) ExpTotal = Exp1 * Exp2;
                 if (CalcType == 4) ExpTotal = Exp1 / Exp2;
+                //if (SqrtRun) ExpTotal = Math.sqrt(Exp1);
 
                 if (NegPress2) {ExpTotal=-ExpTotal;NegPress2=false;}
 
@@ -373,6 +412,7 @@ public class FullscreenActivity extends AppCompatActivity {
         mSub=(Button) findViewById(R.id.buttonsub);
         mMul=(Button) findViewById(R.id.buttonmul);
         mDiv=(Button) findViewById(R.id.buttondiv);
+        mRoot=(Button) findViewById(R.id.buttonroot);
         mExec=(Button) findViewById(R.id.buttoneql);
 
         mCancel=(Button) findViewById(R.id.buttoncanc);
@@ -396,11 +436,13 @@ public class FullscreenActivity extends AppCompatActivity {
         mSub.setOnClickListener(calcRun);
         mMul.setOnClickListener(calcRun);
         mDiv.setOnClickListener(calcRun);
+        mRoot.setOnClickListener(calcRun);
 
         mExec.setOnClickListener(calcRun);
         mCancel.setOnClickListener(calcRun);
         mNeg.setOnClickListener(calcRun);
         mComma.setOnClickListener(calcRun);
+
 
         CmdLine="N"; //Null
         CalcType=0;
