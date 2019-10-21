@@ -80,7 +80,7 @@ public class FullscreenActivity extends AppCompatActivity {
 
     private String[] CmdHistory=new String[1000];
     private int histpos=0,histmax=0;
-    private boolean HistPress=false,HistPressL=false,HistPressR=false;
+    private boolean HistPress=false,HistPress2=false,HistPressL=false,HistPressR=false;
 
     private final View.OnClickListener calcRun = new View.OnClickListener() {
         @Override
@@ -192,6 +192,7 @@ public class FullscreenActivity extends AppCompatActivity {
                 mCmdText.setText(CmdHistory[histpos]);
 
                 HistPress=false;
+                HistPress2=true;
                 HistPressL=false;
                 HistPressR=false;
 
@@ -207,6 +208,7 @@ public class FullscreenActivity extends AppCompatActivity {
                     Exp1 = 0;
                     Exp2 = 0;
                     CmdLine = "0";
+                    CmdHistory[histpos]="0";
                     NewCalc = false;
                     CancelPress = false;
                     CalcPress = false;
@@ -214,7 +216,7 @@ public class FullscreenActivity extends AppCompatActivity {
                     NewCalc = false;
                     ExecRunned = false;
                     ExecRunned2 = false;
-                    CommaPressed=false;
+                    //CommaPressed=false;
                     histpos=histmax;
                     CalcExec2=false;
                 }
@@ -269,7 +271,11 @@ public class FullscreenActivity extends AppCompatActivity {
 
             if (DigitPress) NumEdited = true;
 
-            if (CommaPressed)
+            //.526+.526=
+            //History <-
+            //then .
+
+           if (CommaPressed)
             {
                 CommaExists=false;
 
@@ -329,7 +335,7 @@ public class FullscreenActivity extends AppCompatActivity {
             if (CalcPress) CalcPress2 = true;
 
             if (CmdNum == 0) {
-                if ((CmdLine != "") && (CmdLine != "0")) CmdLine += "0";
+                if ((CmdLine != "") && (CmdLine != "0")) {CmdLine += "0";CmdHistory[histpos]+="0";}
                 else CmdLine = "0";
             }
 
@@ -352,7 +358,6 @@ public class FullscreenActivity extends AppCompatActivity {
             if (CmdNum == 8) CmdLine += "8";
             if (CmdNum == 9) CmdLine += "9";
 
-            if (CmdNum == 0) CmdHistory[histpos]+= "0";
             if (CmdNum == 1) CmdHistory[histpos]+= "1";
             if (CmdNum == 2) CmdHistory[histpos]+= "2";
             if (CmdNum == 3) CmdHistory[histpos]+= "3";
