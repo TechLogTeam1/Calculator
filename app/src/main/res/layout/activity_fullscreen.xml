@@ -104,6 +104,22 @@
             android:text="C" />
 
         <Button
+            android:id="@+id/buttonhistL"
+            android:layout_width="52dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="280dp"
+            android:layout_marginTop="150dp"
+            android:text="←" />
+
+        <Button
+            android:id="@+id/buttonhistR"
+            android:layout_width="52dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="330dp"
+            android:layout_marginTop="150dp"
+            android:text="→" />
+
+        <Button
             android:id="@+id/buttonmul"
             android:layout_width="52dp"
             android:layout_height="wrap_content"

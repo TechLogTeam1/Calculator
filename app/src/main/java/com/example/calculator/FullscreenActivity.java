@@ -61,13 +61,13 @@ public class FullscreenActivity extends AppCompatActivity {
 
     private Button mAdd,mSub,mMul,mDiv,mExec;
 
-    private Button mCancel,mNeg,mComma;
+    private Button mCancel,mNeg,mComma,mHistL,mHistR;
 
     private TextView mCmdText;
     private String CmdLine,CmdLineTmp;
     private int CmdNum;
     private int CalcType,CalcType2;
-    private boolean CalcExec,ExecRunned,ExecRunned2;
+    private boolean CalcExec,CalcExec2,ExecRunned,ExecRunned2;
     private double Exp1,Exp2,ExpTotal;
     private boolean DigitPress,CalcPress,CalcPress2;
     private boolean FirstCalc,NewCalc,CancelPress;
@@ -77,6 +77,10 @@ public class FullscreenActivity extends AppCompatActivity {
     private boolean minus,minusalr;
 
     private int i;
+
+    private String[] CmdHistory=new String[1000];
+    private int histpos=0,histmax=0;
+    private boolean HistPress=false,HistPressL=false,HistPressR=false;
 
     private final View.OnClickListener calcRun = new View.OnClickListener() {
         @Override
@@ -131,6 +135,7 @@ public class FullscreenActivity extends AppCompatActivity {
 
                 case R.id.buttoneql:
                     CalcExec = true;
+                    CalcExec2=true;
                     break; //Exec
 
                 case R.id.buttonadd:
@@ -163,8 +168,56 @@ public class FullscreenActivity extends AppCompatActivity {
                 case R.id.button3:
                     NegPress = true;
                     break;
+                case R.id.buttonhistL:
+                    HistPress=true;
+                    HistPressL=true;
+                    break;
+                case R.id.buttonhistR:
+                    HistPress=true;
+                    HistPressR=true;
+                    break;
 
             }
+
+            if (HistPress)
+            {
+                if (HistPressL) if (histpos>0) histpos--;
+                if (HistPressR) if (histpos<histmax-1) histpos++;
+
+                if (CmdHistory[histpos].length()>22)
+                    mCmdText.setTextSize(10);
+                else
+                    mCmdText.setTextSize(30);
+
+                mCmdText.setText(CmdHistory[histpos]);
+
+                HistPress=false;
+                HistPressL=false;
+                HistPressR=false;
+
+                return;
+            }
+
+            if (!HistPress) mCmdText.setTextSize(30);
+
+            if (CalcExec2)
+                if (!CalcExec)
+                {
+                    ExpTotal = 0;
+                    Exp1 = 0;
+                    Exp2 = 0;
+                    CmdLine = "0";
+                    NewCalc = false;
+                    CancelPress = false;
+                    CalcPress = false;
+                    CalcPress2 = false;
+                    NewCalc = false;
+                    ExecRunned = false;
+                    ExecRunned2 = false;
+                    CommaPressed=false;
+                    histpos=histmax;
+                    CalcExec2=false;
+                }
 
             if (CancelPress) {
                 ExpTotal = 0;
@@ -182,10 +235,20 @@ public class FullscreenActivity extends AppCompatActivity {
                 ExecRunned2 = false;
                 CommaPressed=false;
                 CmdNum = -1;
+                histpos=histmax;
             }
 
+            if (CalcPress)
+            {
+                if (CalcType == 1) CmdHistory[histpos] += "+";
+                if (CalcType == 2) CmdHistory[histpos] += "-";
+                if (CalcType == 3) CmdHistory[histpos] += "*";
+                if (CalcType == 4) CmdHistory[histpos] += "/";
+                if (CalcType == 5) CmdHistory[histpos] += "^";
+            }
             //mNum0.setText(String.valueOf((Exp1)));
             //mComma.setText(String.valueOf((Exp2)));
+
 
             if ((CmdNum >= 0) && (CmdNum <= 9)) DigitPress = true;
 
@@ -213,8 +276,9 @@ public class FullscreenActivity extends AppCompatActivity {
                 if (CmdLine.length()>1)
                     for (i=0;i<=CmdLine.length()-1;i++) if (CmdLine.charAt(i)=='.') CommaExists=true;
 
-                if ((CmdLine=="") || (CmdLine=="N")) CmdLine="0";
-                if (!CommaExists) CmdLine+=".";
+                if ((CmdLine=="") || (CmdLine=="N")) {CmdLine="0";CmdHistory[histpos]+="0";}
+                if (!CommaExists) {CmdLine+="."; CmdHistory[histpos]+= ".";}
+
                 CommaPressed=false;
             }
             if (NegPress)
@@ -222,10 +286,11 @@ public class FullscreenActivity extends AppCompatActivity {
                 minusalr=false;
 
                 //NEW
-                if (CmdLine.charAt(0)!='-') CmdLine="-"+CmdLine;
+                if (CmdLine.charAt(0)!='-') {CmdLine="-"+CmdLine;CmdHistory[histpos]="-"+CmdHistory[histpos];}
                 else
                 {
                     CmdLine = CmdLine.substring(1, CmdLine.length());
+                    CmdHistory[histpos] = CmdHistory[histpos].substring(1, CmdHistory[histpos].length());
                     minusalr=true;
                 }
                 if (FirstCalc) Exp1 = Double.valueOf(CmdLine);
@@ -287,6 +352,17 @@ public class FullscreenActivity extends AppCompatActivity {
             if (CmdNum == 8) CmdLine += "8";
             if (CmdNum == 9) CmdLine += "9";
 
+            if (CmdNum == 0) CmdHistory[histpos]+= "0";
+            if (CmdNum == 1) CmdHistory[histpos]+= "1";
+            if (CmdNum == 2) CmdHistory[histpos]+= "2";
+            if (CmdNum == 3) CmdHistory[histpos]+= "3";
+            if (CmdNum == 4) CmdHistory[histpos]+= "4";
+            if (CmdNum == 5) CmdHistory[histpos]+= "5";
+            if (CmdNum == 6) CmdHistory[histpos]+= "6";
+            if (CmdNum == 7) CmdHistory[histpos]+= "7";
+            if (CmdNum == 8) CmdHistory[histpos]+= "8";
+            if (CmdNum == 9) CmdHistory[histpos]+= "9";
+
             mCmdText.setText(CmdLine);
 
             if (DigitPress) {
@@ -301,6 +377,14 @@ public class FullscreenActivity extends AppCompatActivity {
                 if (CalcType == 2) ExpTotal = Exp1 - Exp2;
                 if (CalcType == 3) ExpTotal = Exp1 * Exp2;
                 if (CalcType == 4) ExpTotal = Exp1 / Exp2;
+
+                CmdHistory[histpos]+="="+String.valueOf((ExpTotal));
+                histpos++; //CHECK
+                histmax++;
+
+                if (histmax>999) {histmax=0;histpos=0;}
+                CmdHistory[histmax]="";
+
 
                 if (NegPress2) {/*ExpTotal=-ExpTotal;*/NegPress2=false;}
 
@@ -380,6 +464,8 @@ public class FullscreenActivity extends AppCompatActivity {
         mCancel=(Button) findViewById(R.id.buttoncanc);
         mNeg=(Button) findViewById(R.id.button3);
         mComma=(Button) findViewById(R.id.button);
+        mHistL=(Button) findViewById(R.id.buttonhistL);
+        mHistR=(Button) findViewById(R.id.buttonhistR);
 
         mCmdText=(TextView) findViewById(R.id.textView);
 
@@ -403,6 +489,8 @@ public class FullscreenActivity extends AppCompatActivity {
         mCancel.setOnClickListener(calcRun);
         mNeg.setOnClickListener(calcRun);
         mComma.setOnClickListener(calcRun);
+        mHistL.setOnClickListener(calcRun);
+        mHistR.setOnClickListener(calcRun);
 
         CmdLine="N"; //Null
         CalcType=0;
@@ -410,7 +498,7 @@ public class FullscreenActivity extends AppCompatActivity {
         FirstCalc=true;
 
         mCmdText.setText("0");
-
+        CmdHistory[0]="";
         this.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE
                 | View.SYSTEM_UI_FLAG_FULLSCREEN
                 | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
