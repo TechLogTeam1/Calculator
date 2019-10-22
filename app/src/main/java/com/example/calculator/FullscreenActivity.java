@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import static java.lang.Math.abs;
 import static java.lang.Math.log;
+import static java.lang.Math.log10;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -327,6 +328,7 @@ public class FullscreenActivity extends AppCompatActivity {
                 if (CalcType == 2) ExpTotal = Exp1 - Exp2;
                 if (CalcType == 3) ExpTotal = Exp1 * Exp2;
                 if (CalcType == 4) ExpTotal = Exp1 / Exp2;
+                if (CalcType == 7) ExpTotal = log10(Exp1);
 
                 if (NegPress2) {ExpTotal=-ExpTotal;NegPress2=false;}
 
