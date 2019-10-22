@@ -13,7 +13,11 @@
     <!-- This FrameLayout insets its children based on system windows usingandroid:fitsSystemWindows. -->
 
 
-    <FrameLayout android:background="#FFFFFF" android:layout_height="match_parent" android:layout_width="match_parent" android:fitsSystemWindows="true">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#FFFFFF"
+        android:fitsSystemWindows="true">
 
         <Button
             android:id="@+id/button10"
@@ -135,7 +139,7 @@
 
         <TextView
             android:id="@+id/textView"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="85dp"
             android:gravity="center_vertical"
             android:text="0"
@@ -164,6 +168,15 @@
             android:layout_marginLeft="220dp"
             android:layout_marginTop="460dp"
             android:text="+/-" />
+
+        <Button
+            android:id="@+id/buttonE"
+            android:layout_width="52dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="250dp"
+            android:layout_marginTop="150dp"
+            android:fadeScrollbars="true"
+            android:text="exp" />
 
 
     </FrameLayout>
