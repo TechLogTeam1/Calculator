@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import static java.lang.Math.abs;
+import static java.lang.Math.log;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -59,7 +60,7 @@ public class FullscreenActivity extends AppCompatActivity {
             ,mNum4,mNum5,mNum6
             ,mNum7,mNum8,mNum9;
 
-    private Button mAdd,mSub,mMul,mDiv,mExec;
+    private Button mAdd,mSub,mMul,mDiv,mExec,mLog;
 
     private Button mCancel,mNeg,mComma;
 
@@ -139,24 +140,36 @@ public class FullscreenActivity extends AppCompatActivity {
                     CalcPress = true;
                     FirstCalc = false;
                     break; //Add
+
                 case R.id.buttonsub:
                     CalcType2 = CalcType;
                     CalcType = 2;
                     CalcPress = true;
                     FirstCalc = false;
                     break; //Sub
+
                 case R.id.buttonmul:
                     CalcType2 = CalcType;
                     CalcType = 3;
                     CalcPress = true;
                     FirstCalc = false;
                     break; //Multi
+
                 case R.id.buttondiv:
                     CalcType2 = CalcType;
                     CalcType = 4;
                     CalcPress = true;
                     FirstCalc = false;
                     break; //Div
+
+                case R.id.buttonLog:
+                    CalcType2 = CalcType;
+                    CalcType = 7;
+                    CalcPress = true;
+                    FirstCalc = false;
+                    CmdLine = "Log(";
+                    break; //Log
+
                 case R.id.buttoncanc:
                     CancelPress = true;
                     break;
@@ -374,6 +387,7 @@ public class FullscreenActivity extends AppCompatActivity {
         mMul=(Button) findViewById(R.id.buttonmul);
         mDiv=(Button) findViewById(R.id.buttondiv);
         mExec=(Button) findViewById(R.id.buttoneql);
+        mLog=(Button) findViewById(R.id.buttonLog);
 
         mCancel=(Button) findViewById(R.id.buttoncanc);
         mNeg=(Button) findViewById(R.id.button3);
@@ -401,6 +415,7 @@ public class FullscreenActivity extends AppCompatActivity {
         mCancel.setOnClickListener(calcRun);
         mNeg.setOnClickListener(calcRun);
         mComma.setOnClickListener(calcRun);
+        mLog.setOnClickListener(calcRun);
 
         CmdLine="N"; //Null
         CalcType=0;

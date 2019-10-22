@@ -104,6 +104,15 @@
             android:text="C" />
 
         <Button
+            android:id="@+id/buttonLog"
+            android:layout_width="52dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="560dp"
+            android:contentDescription="Log("
+            android:text="Log" />
+
+        <Button
             android:id="@+id/buttonmul"
             android:layout_width="52dp"
             android:layout_height="wrap_content"
@@ -164,6 +173,7 @@
             android:layout_marginLeft="220dp"
             android:layout_marginTop="460dp"
             android:text="+/-" />
+
 
 
     </FrameLayout>
