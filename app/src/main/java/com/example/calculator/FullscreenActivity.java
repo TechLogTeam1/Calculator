@@ -167,7 +167,6 @@ public class FullscreenActivity extends AppCompatActivity {
                     CalcType = 7;
                     CalcPress = true;
                     FirstCalc = false;
-                    CmdLine = "Log(";
                     break; //Log
 
                 case R.id.buttoncanc:
@@ -267,7 +266,7 @@ public class FullscreenActivity extends AppCompatActivity {
                         if (CalcType2 == 3) ExpTotal = Exp1 * Exp2;
                         if (CalcType2 == 4) ExpTotal = Exp1 / Exp2;
 
-                        //if (CmdLine.charAt(0)=='-') ExpTotal=-ExpTotal;
+                        if (CalcType2 == 7) ExpTotal = log(Exp1);
 
                         CmdLine = String.valueOf(ExpTotal);
                         mCmdText.setText(CmdLine);
