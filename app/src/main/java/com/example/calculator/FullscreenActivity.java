@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import static java.lang.Math.abs;
+import static java.lang.Math.log;
+import static java.lang.Math.log10;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -62,6 +64,7 @@ public class FullscreenActivity extends AppCompatActivity {
     private Button mAdd,mSub,mMul,mDiv,mExec,mRoot;
     private Button mAdd,mSub,mMul,mDiv,mExec,mPow;
     private Button mAdd,mSub,mMul,mDiv,mExec,mExp;
+    private Button mAdd,mSub,mMul,mDiv,mExec,mLog;
 
     private Button mCancel,mNeg,mComma;
 
@@ -162,6 +165,14 @@ public class FullscreenActivity extends AppCompatActivity {
                     CalcPress = true;
                     FirstCalc = false;
                     break; //Div
+
+                case R.id.buttonLog:
+                    CalcType2 = CalcType;
+                    CalcType = 7;
+                    CalcPress = true;
+                    FirstCalc = false;
+                    break; //Log
+
                 case R.id.buttoncanc:
                     CancelPress = true;
                     break;
@@ -260,11 +271,8 @@ public class FullscreenActivity extends AppCompatActivity {
                 NegPress2 = true;
 
                 NegPress = false;
-                {
 
-                }
 
-            }
 
             }
 
@@ -279,14 +287,17 @@ public class FullscreenActivity extends AppCompatActivity {
                         if (CalcType2 == 4) ExpTotal = Exp1 / Exp2;
                         if (CalcType2 == 6) ExpTotal = Math.sqrt(Exp1);
 
+                        if (CalcType2 == 7) ExpTotal = log(Exp1);
                         //if (CmdLine.charAt(0)=='-') ExpTotal=-ExpTotal;
                         if(CalcType ==6 ) ExpTotal = Math.exp(Exp1);
 
                         CmdLine = String.valueOf(ExpTotal);
                         mCmdText.setText(CmdLine);
 
-
-
+                        Exp1 = ExpTotal; //NEW
+                        //CalcPress=false;
+                        CalcPress2 = false;
+                        NumEdited = false;
                     }
 
             if (CalcPress) CalcPress2 = true;
@@ -354,9 +365,8 @@ public class FullscreenActivity extends AppCompatActivity {
                 if (CalcType == 2) ExpTotal = Exp1 - Exp2;
                 if (CalcType == 3) ExpTotal = Exp1 * Exp2;
                 if (CalcType == 4) ExpTotal = Exp1 / Exp2;
-                //if (SqrtRun) ExpTotal = Math.sqrt(Exp1);
 
-                if (NegPress2) {/*ExpTotal=-ExpTotal;*/NegPress2=false;}
+                if (NegPress2) {ExpTotal=-ExpTotal;NegPress2=false;}
 
                 if (CalcType == 5) ExpTotal = Math.pow(Exp1,Exp2);
                 CmdLine = String.valueOf(ExpTotal);
@@ -432,6 +442,8 @@ public class FullscreenActivity extends AppCompatActivity {
         mDiv=(Button) findViewById(R.id.buttondiv);
         mRoot=(Button) findViewById(R.id.buttonroot);
         mExec=(Button) findViewById(R.id.buttoneql);
+        mLog=(Button) findViewById(R.id.buttonLog);
+
         mPow=(Button) findViewById(R.id.buttonPow);
         mCancel=(Button) findViewById(R.id.buttoncanc);
         mNeg=(Button) findViewById(R.id.button3);
@@ -461,6 +473,7 @@ public class FullscreenActivity extends AppCompatActivity {
         mCancel.setOnClickListener(calcRun);
         mNeg.setOnClickListener(calcRun);
         mComma.setOnClickListener(calcRun);
+        mLog.setOnClickListener(calcRun);
 
         CmdLine="N"; //Null
         CalcType=0;
