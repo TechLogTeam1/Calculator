@@ -61,6 +61,7 @@ public class FullscreenActivity extends AppCompatActivity {
 
     private Button mAdd,mSub,mMul,mDiv,mExec,mRoot;
     private Button mAdd,mSub,mMul,mDiv,mExec,mPow;
+    private Button mAdd,mSub,mMul,mDiv,mExec,mExp;
 
     private Button mCancel,mNeg,mComma;
 
@@ -184,6 +185,12 @@ public class FullscreenActivity extends AppCompatActivity {
                     FirstCalc = false;
                     break; //Pow
 
+                case R.id.buttonE:
+                    CalcType2 = CalcType;
+                    CalcType = 6;
+                    CalcPress = true;
+                    FirstCalc = false;
+                    break;
             }
 
             if (CancelPress) {
@@ -203,9 +210,6 @@ public class FullscreenActivity extends AppCompatActivity {
                 CommaPressed=false;
                 CmdNum = -1;
             }
-
-            //mNum0.setText(String.valueOf((Exp1)));
-            //mComma.setText(String.valueOf((Exp2)));
 
             if ((CmdNum >= 0) && (CmdNum <= 9)) DigitPress = true;
 
@@ -251,15 +255,18 @@ public class FullscreenActivity extends AppCompatActivity {
                 if (FirstCalc) Exp1 = Double.valueOf(CmdLine);
                 else Exp2 = Double.valueOf(CmdLine);
 
-                //if (minusalr) mComma.setText("*"); else mComma.setText(".");
 
-                //if (!minusalr)
+                        }
                 NegPress2 = true;
 
                 NegPress = false;
+                {
+
+                }
 
             }
 
+            }
 
             if (CalcPress2)
                 if (CalcPress)
@@ -273,14 +280,13 @@ public class FullscreenActivity extends AppCompatActivity {
                         if (CalcType2 == 6) ExpTotal = Math.sqrt(Exp1);
 
                         //if (CmdLine.charAt(0)=='-') ExpTotal=-ExpTotal;
+                        if(CalcType ==6 ) ExpTotal = Math.exp(Exp1);
 
                         CmdLine = String.valueOf(ExpTotal);
                         mCmdText.setText(CmdLine);
 
-                        Exp1 = ExpTotal; //NEW
-                        //CalcPress=false;
-                        CalcPress2 = false;
-                        NumEdited = false;
+
+
                     }
 
             if (CalcPress) CalcPress2 = true;
@@ -340,8 +346,9 @@ public class FullscreenActivity extends AppCompatActivity {
                 //CalcType=0;
             }
 
-            if (CalcExec)
-            {
+                    if (!FirstCalc)
+                        Exp2 = -Exp2;
+                }
 
                 if (CalcType == 1) ExpTotal = Exp1 + Exp2;
                 if (CalcType == 2) ExpTotal = Exp1 - Exp2;
@@ -386,7 +393,7 @@ public class FullscreenActivity extends AppCompatActivity {
 
                         //if (CmdLine!="")
                         //if (CmdLine.charAt(0)=='-')
-                        //if (FirstCalc) Exp1=-Exp1; //CHECK ! //PREV
+                        if (FirstCalc) Exp1=-Exp1; //CHECK !
                         NegPress2=false;
                     }
                     FirstCalc = false;
@@ -454,7 +461,6 @@ public class FullscreenActivity extends AppCompatActivity {
         mCancel.setOnClickListener(calcRun);
         mNeg.setOnClickListener(calcRun);
         mComma.setOnClickListener(calcRun);
-
 
         CmdLine="N"; //Null
         CalcType=0;
