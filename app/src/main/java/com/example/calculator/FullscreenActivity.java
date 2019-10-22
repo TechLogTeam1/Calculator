@@ -60,6 +60,7 @@ public class FullscreenActivity extends AppCompatActivity {
             ,mNum7,mNum8,mNum9;
 
     private Button mAdd,mSub,mMul,mDiv,mExec,mRoot;
+    private Button mAdd,mSub,mMul,mDiv,mExec,mPow;
 
     private Button mCancel,mNeg,mComma;
 
@@ -175,6 +176,12 @@ public class FullscreenActivity extends AppCompatActivity {
                     SqrtRun=true;
                     break; //Square Root
 
+                case R.id.buttonPow:
+                    CalcType2 = CalcType;
+                    CalcType = 5;
+                    CalcPress = true;
+                    FirstCalc = false;
+                    break; //Pow
 
             }
 
@@ -357,6 +364,7 @@ public class FullscreenActivity extends AppCompatActivity {
 
                 if (NegPress2) {ExpTotal=-ExpTotal;NegPress2=false;}
 
+                if (CalcType == 5) ExpTotal = Math.pow(Exp1,Exp2);
                 CmdLine = String.valueOf(ExpTotal);
                 mCmdText.setText(CmdLine);
                 CalcExec = false;
@@ -414,7 +422,7 @@ public class FullscreenActivity extends AppCompatActivity {
         mDiv=(Button) findViewById(R.id.buttondiv);
         mRoot=(Button) findViewById(R.id.buttonroot);
         mExec=(Button) findViewById(R.id.buttoneql);
-
+        mPow=(Button) findViewById(R.id.buttonPow);
         mCancel=(Button) findViewById(R.id.buttoncanc);
         mNeg=(Button) findViewById(R.id.button3);
         mComma=(Button) findViewById(R.id.button);
@@ -437,6 +445,7 @@ public class FullscreenActivity extends AppCompatActivity {
         mMul.setOnClickListener(calcRun);
         mDiv.setOnClickListener(calcRun);
         mRoot.setOnClickListener(calcRun);
+        mPow.setOnClickListener(calcRun);
 
         mExec.setOnClickListener(calcRun);
         mCancel.setOnClickListener(calcRun);
