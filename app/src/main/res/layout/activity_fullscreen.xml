@@ -1,11 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 
-<FrameLayout tools:context=".FullscreenActivity"
-    android:background="#0099cc"
-    android:layout_height="match_parent"
-    android:layout_width="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent" android:layout_height="match_parent" android:background="#0099cc" tools:context=".FullscreenActivity">
 
     <!-- The primary full-screen view. This can be replaced with whatever viewis needed to present your content, e.g. VideoView, SurfaceView,TextureView, etc. -->
 
@@ -13,14 +8,15 @@
     <!-- This FrameLayout insets its children based on system windows usingandroid:fitsSystemWindows. -->
 
 
-    <FrameLayout android:background="#FFFFFF" android:layout_height="match_parent" android:layout_width="match_parent" android:fitsSystemWindows="true">
+
+    <FrameLayout android:layout_width="match_parent" android:layout_height="match_parent" android:background="#FFFFFF" android:fitsSystemWindows="true">
 
         <Button
             android:id="@+id/button10"
             android:layout_width="wrap_content"
             android:layout_height="78dp"
             android:layout_marginLeft="50dp"
-            android:layout_marginTop="220dp"
+            android:layout_marginTop="250dp"
             android:text="7" />
 
         <Button
@@ -28,7 +24,7 @@
             android:layout_width="wrap_content"
             android:layout_height="78dp"
             android:layout_marginLeft="135dp"
-            android:layout_marginTop="220dp"
+            android:layout_marginTop="250dp"
             android:text="8" />
 
         <Button
@@ -36,7 +32,7 @@
             android:layout_width="wrap_content"
             android:layout_height="78dp"
             android:layout_marginLeft="220dp"
-            android:layout_marginTop="220dp"
+            android:layout_marginTop="250dp"
             android:text="9" />
 
         <Button
@@ -44,7 +40,7 @@
             android:layout_width="wrap_content"
             android:layout_height="78dp"
             android:layout_marginLeft="50dp"
-            android:layout_marginTop="300dp"
+            android:layout_marginTop="330dp"
             android:text="4" />
 
         <Button
@@ -52,7 +48,7 @@
             android:layout_width="wrap_content"
             android:layout_height="78dp"
             android:layout_marginLeft="135dp"
-            android:layout_marginTop="300dp"
+            android:layout_marginTop="330dp"
             android:text="5" />
 
         <Button
@@ -60,7 +56,7 @@
             android:layout_width="wrap_content"
             android:layout_height="78dp"
             android:layout_marginLeft="220dp"
-            android:layout_marginTop="300dp"
+            android:layout_marginTop="330dp"
             android:text="6" />
 
         <Button
@@ -68,7 +64,7 @@
             android:layout_width="wrap_content"
             android:layout_height="78dp"
             android:layout_marginLeft="50dp"
-            android:layout_marginTop="380dp"
+            android:layout_marginTop="410dp"
             android:text="1" />
 
         <Button
@@ -76,7 +72,7 @@
             android:layout_width="wrap_content"
             android:layout_height="78dp"
             android:layout_marginLeft="135dp"
-            android:layout_marginTop="380dp"
+            android:layout_marginTop="410dp"
             android:text="2" />
 
         <Button
@@ -84,78 +80,77 @@
             android:layout_width="wrap_content"
             android:layout_height="78dp"
             android:layout_marginLeft="220dp"
-            android:layout_marginTop="380dp"
+            android:layout_marginTop="410dp"
             android:text="3" />
 
-        <Button
-            android:id="@+id/buttondiv"
-            android:layout_width="52dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="150dp"
-            android:layout_marginTop="150dp"
-            android:text="/" />
+    <Button android:layout_width="52dp" android:layout_height="wrap_content" android:text="/" android:layout_marginTop="150dp" android:layout_marginLeft="150dp" android:id="@+id/buttondiv"/>
+
+    <Button android:layout_width="52dp" android:layout_height="wrap_content" android:text="C" android:layout_marginTop="150dp" android:layout_marginLeft="200dp" android:id="@+id/buttoncanc"/>
 
         <Button
-            android:id="@+id/buttoncanc"
+            android:id="@+id/buttonroot"
             android:layout_width="52dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="200dp"
+            android:layout_marginLeft="260dp"
             android:layout_marginTop="150dp"
-            android:text="C" />
+            android:text="√" />
+
+        <Button
+            android:id="@+id/buttonPow"
+            android:layout_width="52dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="315dp"
+            android:layout_marginTop="150dp"
+            android:text="^" />
+
+        <Button
+            android:id="@+id/buttonE"
+            android:layout_width="52dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="200dp"
+            android:text="e" />
 
         <Button
             android:id="@+id/buttonLog"
             android:layout_width="52dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="0dp"
-            android:layout_marginTop="560dp"
-            android:contentDescription="Log("
-            android:text="Log" />
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="200dp"
+            android:text="log" />
 
         <Button
-            android:id="@+id/buttonmul"
+            android:id="@+id/buttonhistL"
             android:layout_width="52dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="100dp"
-            android:layout_marginTop="150dp"
-            android:text="X" />
+            android:layout_marginTop="200dp"
+            android:text="←" />
 
         <Button
-            android:id="@+id/buttonsub"
+            android:id="@+id/buttonhistR"
             android:layout_width="52dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="50dp"
-            android:layout_marginTop="150dp"
-            android:text="-" />
+            android:layout_marginLeft="150dp"
+            android:layout_marginTop="200dp"
+            android:text="→" />
 
-        <Button
-            android:id="@+id/buttoneql"
-            android:layout_width="match_parent"
-            android:layout_height="62dp"
-            android:layout_marginTop="80dp"
-            android:text="=" />
+        <Button android:layout_width="52dp" android:layout_height="wrap_content" android:text="X" android:layout_marginTop="150dp" android:layout_marginLeft="100dp" android:id="@+id/buttonmul"/>
 
-        <Button
-            android:id="@+id/buttonadd"
-            android:layout_width="52dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="150dp"
-            android:text="+" />
+    <Button android:layout_width="52dp" android:layout_height="wrap_content" android:text="-" android:layout_marginTop="150dp" android:layout_marginLeft="50dp" android:id="@+id/buttonsub"/>
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="match_parent"
-            android:layout_height="85dp"
-            android:gravity="center_vertical"
-            android:text="0"
-            android:textSize="30sp" />
+    <Button android:layout_width="match_parent" android:layout_height="62dp" android:text="=" android:layout_marginTop="80dp" android:id="@+id/buttoneql"/>
+
+    <Button android:layout_width="52dp" android:layout_height="wrap_content" android:text="+" android:layout_marginTop="150dp" android:id="@+id/buttonadd"/>
+
+    <TextView android:layout_width="match_parent" android:layout_height="85dp" android:text="0" android:id="@+id/textView" android:textSize="30sp" android:gravity="center_vertical"/>
 
         <Button
             android:id="@+id/button"
             android:layout_width="wrap_content"
             android:layout_height="78dp"
             android:layout_marginLeft="50dp"
-            android:layout_marginTop="460dp"
+            android:layout_marginTop="490dp"
             android:text="." />
 
         <Button
@@ -163,7 +158,7 @@
             android:layout_width="wrap_content"
             android:layout_height="78dp"
             android:layout_marginLeft="135dp"
-            android:layout_marginTop="460dp"
+            android:layout_marginTop="490dp"
             android:text="0" />
 
         <Button
@@ -171,20 +166,9 @@
             android:layout_width="wrap_content"
             android:layout_height="78dp"
             android:layout_marginLeft="220dp"
-            android:layout_marginTop="460dp"
+            android:layout_marginTop="490dp"
             android:text="+/-" />
 
-        <Button
-            android:id="@+id/buttonE"
-            android:layout_width="52dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="250dp"
-            android:layout_marginTop="150dp"
-            android:fadeScrollbars="true"
-            android:text="exp" />
-
-
-
-    </FrameLayout>
 </FrameLayout>
 
+</FrameLayout>
